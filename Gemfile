@@ -45,6 +45,7 @@ gem 'will_paginate', '~> 3.1.0'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
