@@ -1,0 +1,8 @@
+
+<div clarr="row">
+<ul class="list-group">
+	<%@users.each do |user|%>
+	 <li class="list-group-item"><span class="badge"><%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %></span> <strong><%=user.email%></strong></li>
+	<% end %>
+</ul>
+</div>

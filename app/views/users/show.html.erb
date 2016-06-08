@@ -1,0 +1,25 @@
+
+<div clarr="row">
+	<h2>Friends</h2>
+	<ul class="list-group">
+		<%@user.friendships.where(:status => true).each do |friendship|%>
+		 <li class="list-group-item"><span class="badge"><%= link_to "Remove Friend",  friendship, :method => :delete  %></span> <strong><%=friendship.friend.email%></strong></li>
+		<% end %>
+		<%@user.inverse_friendships.where(:status => true).each do |friendship|%>
+		 <li class="list-group-item"><span class="badge"><%= link_to "Remove Friend",  friendship, :method => :delete  %></span> <strong><%=friendship.user.email%></strong></li>
+		<% end %>
+	</ul>
+	<p><%= link_to "Add Friends", user_friends_path %></p>
+	<br>
+	<h2>Friend Requests</h2>
+	<ul class="list-group">
+
+	<%@user.inverse_friendships.where(:status => false).each do |friendship|%>
+		 <li class="list-group-item"><span class="badge"><%= link_to "Accept Request",  user_friend_accept_request_path(friendship)  %></span> <strong><%=friendship.user.email%></strong></li>
+	<% end %>
+
+
+		
+	</ul>
+
+</div>
