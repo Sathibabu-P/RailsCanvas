@@ -22,6 +22,6 @@ module TestProject
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-  
+    config.secret_token = '557c000982ab998a1f72bf8f69b211be'
   end
 end
