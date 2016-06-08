@@ -83,7 +83,11 @@ class BlogsController < ApplicationController
 
        reciepents = current_user.friendships.where(:status => true).map {|friendship| friendship.friend.email}    
        reciepents << current_user.inverse_friendships.where(:status => true).map {|friend| friend.user.email}  
-   
+      
+       if params[:friends].present?
+        reciepents = User.find(params[:friends]).map(&:email)
+       end
+
       reciepents.flatten.each do |user|        
          BlogMailer.share_blog(@blog,user).deliver_now 
       end 

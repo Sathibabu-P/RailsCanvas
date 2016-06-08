@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     member do
        get 'destroy_photo'
     end    
-    get 'share' 
+     get 'share' 
   end
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
    root 'home#index'
    resources :home
-   
+   get '/blog_share_select' => "blogs#share"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

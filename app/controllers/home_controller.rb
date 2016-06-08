@@ -8,5 +8,9 @@ class HomeController < ApplicationController
 
   def show
   	@blog = Blog.find(params[:id])
+  	# get all current user friends
+  	@friends = current_user.friendships.where(:status => true).map { |friendship|  friendship.friend} 
+    @friends << current_user.inverse_friendships.where(:status => true).map { |friendship|  friendship.user}
+   	@friends = @friends.flatten
   end
 end
