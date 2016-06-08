@@ -79,13 +79,13 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'https://salty-stream-11147.herokuapp.com' }
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-      address: 'smtp.gmail.com', 
-      port: '587',
-      enable_starttls_auto: true,
-      user_name: 'sathipatchipala@gmail.com',
-      password:  'f93swEsw',
-      authentication: :plain
-      }
+   config.action_mailer.delivery_method = :smtp
+   config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'example.com',
+    user_name:            'sathibabu.nyros@gmail.com',
+    password:             'f93swEsw',
+    authentication:       'plain',
+    enable_starttls_auto: true  }
 end
