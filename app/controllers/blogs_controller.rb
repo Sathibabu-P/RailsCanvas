@@ -80,13 +80,14 @@ class BlogsController < ApplicationController
   def share
     @blog = Blog.find(params[:blog_id])
     if @blog.present? 
+      
        reciepents = current_user.friendships.where(:status => true).map {|friendship| friendship.friend.email}    
        reciepents << current_user.inverse_friendships.where(:status => true).map {|friend| friend.user.email}  
    
-       reciepents.flatten.each do |user|        
+      reciepents.flatten.each do |user|        
          BlogMailer.share_blog(@blog,user).deliver_now 
       end 
-          
+
       respond_to do |format|
         format.html { redirect_to request.referrer, notice: 'Share Blog successfully..' }
         format.js
