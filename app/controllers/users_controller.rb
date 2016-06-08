@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   	  friends = [current_user.id] 
   	  friends << current_user.friendships.map(&:friend_id)
   	  friends << current_user.inverse_friends.map(&:id)
-  	  puts "==================#{friends.flatten}"
   	  @users = User.where('id NOT IN (?)',friends.flatten)
   end
 
