@@ -35,7 +35,7 @@ gem 'devise', '~> 4.1', '>= 4.1.1'
 # for 
 gem 'simple_form', '~> 3.2', '>= 3.2.1'
 
-
+gem 'rails_12factor', group: :production
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
