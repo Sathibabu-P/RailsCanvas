@@ -17,3 +17,56 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+
+
+/* Atention in %content in CSS*/
+
+%content {
+  font-size: 32px;
+  text-align: center;
+  margin: 0 5px;
+}
+.bin {
+  @extend %content;
+  min-height: 450px;
+  min-width: 900px;
+  float: left;
+  border: 1px solid red;
+  padding: 20px;
+}
+.item {
+  @extend %content;
+  min-height: 100px;
+  min-width: 100px;
+  background: #222222;
+  float: right;
+  transition: all 0.2s ease;
+  margin: 20px !important;
+}
+.drag {
+  opacity: 0.5;
+}
+.over {
+  background: gray;
+}
+
+.text{
+  min-height: 10px;
+  min-width: 10px;
+}
+
+
+.toolbaox {
+    border: 1px solid rgb(44, 0, 204);
+    min-height: 450px;
+    min-width: 100px;
+    float: left;
+    padding: 10px;
+}
+
+
+#circle {
+    border-radius: 50px !important;
+    background: #222222 !important;
+}

@@ -1,73 +1,31 @@
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('images/home-bg.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>Clean Blog</h1>
-                        <hr class="small">
-                        <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+	
+    <canvas id="graphCanvas" height=450 width=900 canvas drop="handleDrop" bin="bin" id="bin"></canvas>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            	<%@blogs.each do |blog|%>
-            	  <div class="post-preview">
-                    <h2 class="post-title"><%=link_to blog.title, home_path(blog)%></h2>
-                    
-                    </a>
-                    <p class="post-meta">Posted by <a href="#"><%=blog.user.email%></a><%=time_ago_in_words(blog.created_at)%> ago </p>
-                </div>
-                <hr>
-            	<%end%>
-                <!-- Pager -->
-                <%= will_paginate @blogs %>
-            </div>
-        </div>
+
+    <div style="float:right">
+    	
+    <div class="item rect" id="rect"   item="item" draggable="true" > 
+	</div>
+	<br>
+
+	<div class="item circle" id="circle"   item="item"  draggable="true">
+	</div>
+	<br>
+
+	<span draggable="true" class="text-data" id="text" >some text here</span>
+
     </div>
 
-    <hr>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+
+ <style type="text/css">
+ 	
+/*#canvas{
+  border-bottom: 1px solid rgba(0,0,0,0.3); 
+  background-color: #123;
+  box-shadow: 0 9px 20px -5px rgba(0,0,0,0.8);
+}*/
+#graphCanvas {
+    border:1px solid red;
+}
+ </style>

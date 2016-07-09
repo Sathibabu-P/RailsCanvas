@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Shape.create(name: 'rect')
+Shape.create(name: 'circle')
+Shape.create(name: 'text')

@@ -11,36 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607221752) do
+ActiveRecord::Schema.define(version: 20160708093054) do
 
-  create_table "blog_photos", force: :cascade do |t|
-    t.integer  "blog_id",            limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "photo_file_name",    limit: 255
-    t.string   "photo_content_type", limit: 255
-    t.integer  "photo_file_size",    limit: 4
-    t.datetime "photo_updated_at"
+  create_table "shapes", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  create_table "blogs", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.text     "description", limit: 65535
-    t.boolean  "publish",                   default: false
-    t.integer  "user_id",     limit: 4
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-  end
-
-  add_index "blogs", ["user_id"], name: "index_blogs_on_user_id", using: :btree
-
-  create_table "friendships", force: :cascade do |t|
+  create_table "user_shapes", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
-    t.integer  "friend_id",  limit: 4
-    t.boolean  "status",               default: false
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.integer  "shape_id",   limit: 4
+    t.integer  "x",          limit: 4,     default: 10
+    t.integer  "y",          limit: 4,     default: 10
+    t.integer  "w",          limit: 4,     default: 100
+    t.integer  "h",          limit: 4,     default: 100
+    t.integer  "r",          limit: 4,     default: 50
+    t.string   "text",       limit: 255,   default: "some text here"
+    t.text     "data",       limit: 65535
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
   end
+
+  add_index "user_shapes", ["shape_id"], name: "index_user_shapes_on_shape_id", using: :btree
+  add_index "user_shapes", ["user_id"], name: "index_user_shapes_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

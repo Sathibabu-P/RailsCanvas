@@ -3,13 +3,11 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :blogs, :dependent => :destroy
+ 
 
 
-  has_many :friendships
-  has_many :friends, :through => :friendships
-  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+  has_many :user_shapes
+  has_many :shapes, through: :user_shapes
   
   
 end

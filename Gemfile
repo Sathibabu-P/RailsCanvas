@@ -27,17 +27,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # for heroku deployment
 gem 'pg'
-
+gem 'angularjs-rails', '~> 1.5', '>= 1.5.6'
 # for style
 gem 'bootstrap-sass', '~> 3.3.6'
 # for user registration and authentication
 gem 'devise', '~> 4.1', '>= 4.1.1'
 # for 
 gem 'simple_form', '~> 3.2', '>= 3.2.1'
-# for image uploads
-gem 'paperclip', '~> 4.3', '>= 4.3.6'
-# 
-gem 'will_paginate', '~> 3.1.0'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
