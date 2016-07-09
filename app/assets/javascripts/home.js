@@ -131,7 +131,7 @@ app.controller('MainCtrl', function($scope, $http,$rootScope) {
                 }else if(shape == 'circle'){
                   ctx.fillStyle = "#222222";
                   ctx.beginPath();
-                  ctx.arc(res['startX'] + res['w'] / 2 , res['startY'] + res['w'] / 2, res['w'] / 2 , 0, Math.PI*2, true);
+                  ctx.arc(res['startX'], res['startY'], res['w'] / 2 , 0, Math.PI*2, true);
                   ctx.fill();
                 }
                 // drawHandles();
