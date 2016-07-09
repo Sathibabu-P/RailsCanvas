@@ -266,12 +266,11 @@ app.controller('MainCtrl', function($scope, $http,$rootScope) {
                 new_rect(x , y , w, h);
              }else if(s == 'circle'){
                 ctx.fillStyle = "#222222";
-                new_circle(x + 50, y + 50,r);
+                new_circle(x, y,r);
              }else if(s == 'text'){
                 new_text(x , y <= 0 ? (y + 300) : y);
              } else {
-                ctx.fillStyle = "#222222";
-                new_rect(x - 20, y - 20, w, h);
+                
              }
           }
 
