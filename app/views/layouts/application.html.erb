@@ -76,20 +76,32 @@ Shape.prototype.draw = function(ctx) {
 }
 
 // Determine if a point is inside the shape's bounds
-Shape.prototype.contains = function(mx, my) {
+Shape.prototype.contains = function(mx, my,s) {
   // All we have to do is make sure the Mouse X,Y fall in the area between
   // the shape's X and (X + Width) and its Y and (Y + Height)
-  return  (this.x <= mx) && (this.x + this.w - 15 >= mx) &&
+  
+  if(s == 'circle'){
+    return   ((this.x - this.r) <= mx) && ((this.r - this.r) <= my) && ((this.x - this.r) + this.w >= mx) && (my <= this.y + (this.r / 2)) &&
+            ((this.y - this.r) + this.h  >= my) && (mx <= this.x + (this.r / 2)) ;
+  }   else{
+    return  (this.x <= mx) && (this.x + this.w - 15 >= mx) &&
           (this.y <= my) && (this.y + this.h - 15 >= my);
+  }     
 }
 
 
 // Determine if a point is corner of the shape's bounds
-Shape.prototype.corners = function(mx, my) {
+Shape.prototype.corners = function(mx, my,s) {
   // All we have to do is make sure the Mouse X,Y fall in the area between
   // the shape's X and (X + Width) and its Y and (Y + Height)
-  return  (mx >= this.x + this.w - 15) && (this.x + this.w  >= mx) &&
+
+  if(s == 'circle'){
+     return  (this.x  + (this.r / 2) <= mx) && (this.x  + this.r >= mx) &&
+             (this.y + (this.r / 2) <= my) && (this.y  + this.r >= my);
+  }else{
+    return  (mx >= this.x + this.w - 15) && (this.x + this.w  >= mx) &&
           (my >= this.y + this.h - 15)  && (this.y + this.h >= my);
+  }
 }
 
 function CanvasState(canvas) {
@@ -144,9 +156,9 @@ function CanvasState(canvas) {
     var l = shapes.length;
     for (var i = l-1; i >= 0; i--) {
 
-
+      var shape = shapes[i];
       // for dragging
-      if (shapes[i].contains(mx, my)) {
+      if (shapes[i].contains(mx, my,shape.s)) {
         var mySel = shapes[i];
         // Keep track of where in the object we clicked
         // so we can move it smoothly (see mousemove)
@@ -161,7 +173,7 @@ function CanvasState(canvas) {
 
 
       // for resize
-      if (shapes[i].corners(mx, my)) {
+      if (shapes[i].corners(mx, my,shape.s)) {
         var mySel = shapes[i];
         // Keep track of where in the object we clicked
         // so we can move it smoothly (see mousemove)
@@ -198,8 +210,9 @@ function CanvasState(canvas) {
       // We don't want to drag the object by its top-left corner, we want to drag it
       // from where we clicked. Thats why we saved the offset and use it here
       myState.selection.w = Math.abs(myState.selection.x - mouse.x) 
-      // mouse.x - myState.dragoffx;
-      myState.selection.h = Math.abs(myState.selection.y - mouse.y) 
+            // mouse.x - myState.dragoffx;
+      myState.selection.h = Math.abs(myState.selection.y - mouse.y)
+      myState.selection.r = Math.abs(myState.selection.w / 2) 
       myState.valid = false; // Something's dragging so we must redraw
     }
 
@@ -284,11 +297,11 @@ CanvasState.prototype.draw = function() {
       ctx.lineWidth = this.selectionWidth;
       var mySel = this.selection;
       // ctx.strokeRect(mySel.x,mySel.y,mySel.w,mySel.h);
-       // if(mySel.s == 'circle'){
-       //   // ctx.stroke(mySel.x,mySel.y,mySel.r);
-       // }else{
-       //   ctx.strokeRect(mySel.x,mySel.y,mySel.w,mySel.h);
-       // }
+       if(mySel.s == 'circle'){
+          ctx.stroke();
+       }else{
+         ctx.strokeRect(mySel.x,mySel.y,mySel.w,mySel.h);
+       }
      
 
     }
