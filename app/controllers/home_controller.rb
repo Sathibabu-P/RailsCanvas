@@ -26,6 +26,7 @@ class HomeController < ApplicationController
       @user_shape.w = params[:w]
       @user_shape.h = params[:h]
       @user_shape.r = params[:r]
+      @user_shape.text = params[:text]
       @user_shape.save!
     end
     render :json => true
