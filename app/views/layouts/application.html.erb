@@ -89,7 +89,7 @@ Shape.prototype.contains = function(mx, my,s) {
           (this.y <= my) && (this.y + this.h - 15 >= my);
   } else {
 
-    return (mx >= this.x - 10) && ((this.x + this.w - 15) >= mx) && (my >= this.y - 10) && ((this.y + this.h - 15) >= my)
+    return (this.x - 10 <= mx) && (this.x + this.w >= mx) && (this.y - 10 <= my) && ((this.y + 2) >= my)
   }    
 }
 
@@ -106,7 +106,7 @@ Shape.prototype.corners = function(mx, my,s) {
     return  (mx >= this.x + this.w - 15) && (this.x + this.w  >= mx) &&
           (my >= this.y + this.h - 15)  && (this.y + this.h >= my);
   }else{
-     return (mx >= (this.x + this.w))  && (my >= (this.y + this.h))
+     return (this.x - 10 <= mx) && (this.x + this.w >= mx) && (this.y - 10 <= my) && ((this.y + 10) >= my)
   }
 }
 
@@ -176,7 +176,8 @@ function CanvasState(canvas) {
         myState.selection = mySel;
         myState.valid = false;
 
-        if(shape.s == 'text'){
+       
+         if(shape.s == 'text'){
          myState.textAreaPopUp = true;
          myState.resize = false;
          myState.dragging = false;
@@ -201,8 +202,11 @@ function CanvasState(canvas) {
           } 
          }
         }
+        
         return;
       }
+
+
 
 
       // for resize
@@ -270,6 +274,14 @@ function CanvasState(canvas) {
       myState.valid = false; // Need to clear the old selection border
     }
   }, true);
+
+
+
+  // edit text
+
+
+
+
   canvas.addEventListener('mousemove', function(e) {
     if (myState.dragging){
       var mouse = myState.getMouse(e);
