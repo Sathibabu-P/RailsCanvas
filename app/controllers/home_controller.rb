@@ -21,6 +21,8 @@ class HomeController < ApplicationController
   def update
     @user_shape = UserShape.find(params[:id])
     if @user_shape.present?
+      @user_shape.x = params[:x]
+      @user_shape.y = params[:y]
       @user_shape.w = params[:w]
       @user_shape.h = params[:h]
       @user_shape.r = params[:r]
