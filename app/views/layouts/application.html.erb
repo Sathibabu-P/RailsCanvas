@@ -89,7 +89,7 @@ Shape.prototype.contains = function(mx, my,s) {
           (this.y <= my) && (this.y + this.h - 15 >= my);
   } else {
 
-    return (mx >= this.x - 10) && ((this.x + this.w) >= mx) && (my >= this.y - 10) && ((this.y + this.h) >= my)
+    return (mx >= this.x - 10) && ((this.x + this.w - 15) >= mx) && (my >= this.y - 10) && ((this.y + this.h - 15) >= my)
   }    
 }
 
@@ -106,7 +106,7 @@ Shape.prototype.corners = function(mx, my,s) {
     return  (mx >= this.x + this.w - 15) && (this.x + this.w  >= mx) &&
           (my >= this.y + this.h - 15)  && (this.y + this.h >= my);
   }else{
-     
+     return (mx >= (this.x + this.w))  && (my >= (this.y + this.h))
   }
 }
 
@@ -212,8 +212,9 @@ function CanvasState(canvas) {
         // so we can move it smoothly (see mousemove)
         myState.dragoffx = mx - mySel.x;
         myState.dragoffy = my - mySel.y;
-        myState.resize = true;
-        myState.dragging = false;
+        
+        shape.s == 'text' ? myState.resize = false : myState.resize = true;
+        shape.s == 'text' ? myState.dragging= true : myState.dragging = false;
         myState.selection = mySel;
         myState.valid = false;
         return;
@@ -228,7 +229,7 @@ function CanvasState(canvas) {
 
      if ($('#textAreaPopUp').length >= 0) {
 
-        var value = $('#textareaTest').val();
+         myState.selection.text = $('#textareaTest').val();
         $('#textAreaPopUp').remove();
 
 
@@ -239,7 +240,7 @@ function CanvasState(canvas) {
               w: myState.selection.w,
               h: myState.selection.h,
               r: myState.selection.r,         
-              text: value,         
+              text: myState.selection.text,         
               id: myState.selection.id
           });
         var config = {
@@ -305,7 +306,8 @@ function CanvasState(canvas) {
           y: myState.selection.y,
           w: myState.selection.w,
           h: myState.selection.h,
-          r: myState.selection.r,         
+          r: myState.selection.r,      
+          text: myState.selection.text,            
           id: myState.selection.id
       });
     var config = {
