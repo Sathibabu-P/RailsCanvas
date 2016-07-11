@@ -83,10 +83,12 @@ Shape.prototype.contains = function(mx, my,s) {
   if(s == 'circle'){
     return   ((this.x - this.r) <= mx) && ((this.r - this.r) <= my) && ((this.x - this.r) + this.w >= mx) && (my <= this.y + (this.r / 2)) &&
             ((this.y - this.r) + this.h  >= my) && (mx <= this.x + (this.r / 2)) ;
-  }   else{
+  }   else if(s == 'rect'){
     return  (this.x <= mx) && (this.x + this.w - 15 >= mx) &&
           (this.y <= my) && (this.y + this.h - 15 >= my);
-  }     
+  } else{
+    return (mx >= this.x - 10) && ((this.x + this.w) >= mx) && (my >= this.y - 10) && ((this.y + this.h) >= my)
+  }    
 }
 
 
@@ -98,9 +100,11 @@ Shape.prototype.corners = function(mx, my,s) {
   if(s == 'circle'){
      return  (this.x  + (this.r / 2) <= mx) && (this.x  + this.r >= mx) &&
              (this.y + (this.r / 2) <= my) && (this.y  + this.r >= my);
-  }else{
+  }else if(s == 'rect'){
     return  (mx >= this.x + this.w - 15) && (this.x + this.w  >= mx) &&
           (my >= this.y + this.h - 15)  && (this.y + this.h >= my);
+  }else{
+     
   }
 }
 
