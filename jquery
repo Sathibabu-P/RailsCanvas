@@ -1,0 +1,183 @@
+window.onload = function() {
+
+
+        var cell =document.querySelectorAll('.targets');
+        for(var i=0;i<cell.length;i++){
+
+         var el = document.getElementById(''+cell[i].id+'');
+        // var el = $('div .targets');
+
+        // $('div .targets').addEventListener("onmousedown", mousedown, false);
+    
+
+         var mover = false, x, y, posx, posy, first = true, pos;
+
+         
+         function mousedown(evt) {
+            console.log('wowo')
+         }
+       
+        el.onmousedown = function(evt) {
+
+           
+
+            var obj = evt.srcElement;
+
+                mover = true;
+
+                if(IsInDropZone(evt))
+                {       
+                   mover = false;
+                }
+
+
+        };
+        el.onmouseup = function(evt) {
+            mover = false;
+            first = true;
+
+
+                // Check if we are in the drop Zone
+                if(IsInDropZone(evt))
+                {       
+                   mover = false;
+                    // var position = $("#dZone").offset(); 
+                    console.log(pos)
+                    $(this).animate( { top: pos.top+"px", left: pos.left+"px" }, 100)
+
+                   
+                }
+
+                else
+                { 
+                     var pos = $(this).parent().offset();
+
+                     $(this).animate( { top: pos.top+"px", left: pos.left+"px" }, 1000)
+
+                    
+
+                
+                }
+
+
+
+
+        };
+        el.onmousemove = function(e) {
+            if (mover) {
+                if (first) {
+
+                    x = e.offsetX;
+                    y = e.offsetY;
+                    first = false;
+                }
+                posx = e.pageX - x;
+                posy = e.pageY - y;
+                this.style.left = posx + 'px';
+                this.style.top = posy + 'px';
+            }
+        };
+
+    }
+   }
+
+
+
+    var dropZoneArray = new Array(5);
+	var dropfillZoneArray = new Array(5);
+    dropZoneArray[0] = "dZone";
+    dropZoneArray[1] = "dZone2";
+	dropZoneArray[2] = "dZone3";
+    
+
+        function IsInDropZone(evt)
+        {
+            var result = false;
+            var obj = evt.srcElement;
+
+            var id = obj.id;
+            drop = $('#'+id+'').data("drop")
+
+
+              x = evt.offsetX;
+              y = evt.offsetY;                     
+              posx = evt.pageX;
+              posy = evt.pageY;
+          
+
+            // iterate through the array and find it the id exists
+            for(i = 0; i < dropZoneArray.length-1; i++)
+            {
+
+              
+              
+               pos = $('#'+dropZoneArray[i]+'').offset(); 
+               if(pos){
+                  
+
+                   
+                    if(posx >= pos.left && posx <= pos.left+100)  {
+                        if(posy >= pos.top && posy <= pos.top+100){
+							if(dropfillZoneArray[i]==''){
+								result = true;
+								dropfillZoneArray[i] = 1;
+
+								break;
+							}
+                            
+                        }
+                    }
+                  
+               }
+
+               // console.log(('#'+dropZoneArray[i]+''));
+                
+               
+               
+            }
+           
+            return result;
+        }
+		
+		
+		var tageteArray = new Array(5);
+		tageteArray[0] = "target1";
+		tageteArray[1] = "target2";
+		tageteArray[2] = "target3";
+		
+		$("#reset").click(function(){
+			// iterate through the array and find it the id exists
+            for(i = 0; i < tageteArray.length-1; i++)
+            {
+				
+				
+				var poss = $('#'+dropZoneArray[i]+'').offset();
+
+                $('#'+tageteArray[i]+'').animate( { top: poss.top+"px", left: poss.left+"px" }, 1000)
+
+			}
+		});
+
+        function Drop(e)
+        {
+            var evt = e || window.event;
+
+            // check that if we are in the drop zone
+            if(IsInDropZone(evt))    
+            {       
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+
+        function ResetPosition(argument) {
+            // body...
+        }
+
+        function getPosition(evt) {
+             x = evt.offsetX;
+             y = evt.offsetY;
+             posx = e.pageX - x;
+             posy = e.pageY - y;
+        }
